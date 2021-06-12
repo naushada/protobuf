@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+/* package is mapped to namespace */
+package unicloud;
+
+message common_elm {
+  optional uint32 task = 1;
+  optional uint32 node = 2;
+  optional uint64 proc = 3;
+}
+
+message header {
+  optional uint32 version = 1;
+  optional common_elm sender = 2;
+  optional common_elm receiver = 3;
+  /* length of payload following common header */
+  optional uint32 payload_length = 4;
+}
+
+message payload {
+  optional uint32 length = 1;
+  optional bytes data = 2;
+}
+
+message request_ {
+  optional header header = 1;
+  repeated payload data = 2;
+}
+
+message response_ {
+  optional request_ resp = 1;
+}
