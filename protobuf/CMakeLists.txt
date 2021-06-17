@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 2.8.9)
-project(concept)
+cmake_minimum_required(VERSION 3.10)
+project(community VERSION 1.0)
 
 find_package(Protobuf REQUIRED)
 
@@ -16,6 +16,14 @@ include_directories(${Protobuf_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${SOURCES_PROTO})
 
-add_executable(unimanage ${SOURCES_CC} ${PROTO_SRCS} ${PROTO_HDRS})
-target_link_libraries(unimanage ${Protobuf_LIBRARIES})
+add_executable(concept ${SOURCES_CC} ${PROTO_SRCS} ${PROTO_HDRS})
+target_link_libraries(concept ${Protobuf_LIBRARIES})
+install(TARGETS concept DESTINATION bin)
+
+
+include(InstallRequiredSystemLibraries)
+#set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+include(CPack)
 
